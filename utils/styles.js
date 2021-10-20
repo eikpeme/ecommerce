@@ -22,7 +22,7 @@ const useStyles = makeStyles({
     textAlign: "center",
   },
   section: {
-    margintTop: 10,
+    marginTop: 10,
     marginBottom: 10,
   },
 });

@@ -16,7 +16,7 @@ import {
 import useStyles from "../../utils/styles";
 
 const ProductScreen = () => {
-  const classes = useStyles;
+  const classes = useStyles();
   const router = useRouter();
   const { slug } = router.query;
 
@@ -42,8 +42,11 @@ const ProductScreen = () => {
         </Grid>
         <Grid item md={3} xs={12}>
           <List>
-          <ListItem>
-              <Typography component="h1"> {product.name}</Typography>
+            <ListItem>
+              <Typography component="h1" variant="h1">
+                {" "}
+                {product.name}
+              </Typography>
             </ListItem>
             <ListItem>
               <Typography> Category: {product.category}</Typography>
@@ -67,7 +70,7 @@ const ProductScreen = () => {
               <ListItem>
                 <Grid container>
                   <Grid item xs={6}>
-                    <Typography> Price</Typography>{" "}
+                    <Typography> Price</Typography>
                   </Grid>
                   <Grid item xs={6}>
                     <Typography> ${product.price}</Typography>{" "}
@@ -77,7 +80,7 @@ const ProductScreen = () => {
               <ListItem>
                 <Grid container>
                   <Grid item xs={6}>
-                    <Typography> Status</Typography>{" "}
+                    <Typography> Status</Typography>
                   </Grid>
                   <Grid item xs={6}>
                     <Typography>
@@ -87,7 +90,7 @@ const ProductScreen = () => {
                 </Grid>
               </ListItem>
               <ListItem>
-                <Button   fullWidth variant="contained" color="primary">
+                <Button fullWidth variant="contained" color="primary">
                   Add to Cart
                 </Button>
               </ListItem>
