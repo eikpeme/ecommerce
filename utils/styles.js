@@ -13,12 +13,17 @@ const useStyles = makeStyles({
     fontWeight: "bold",
     fonrSize: "1.5rem",
   },
-  grow:{flex:1},
+  grow: { flex: 1 },
   main: {
     minHeight: "80vh",
   },
   footer: {
+    margintTop: 10,
     textAlign: "center",
+  },
+  section: {
+    margintTop: 10,
+    marginBottom: 10,
   },
 });
 
