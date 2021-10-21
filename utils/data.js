@@ -1,4 +1,20 @@
+import bycrypt from "bcryptjs";
 const data = {
+  users: [
+    {
+      name: "John",
+      email: "admin@example.com",
+      password: bycrypt.hashSync("123456"),
+      isAdmin: true,
+    },
+    {
+      name: "Jane",
+      email: "user@example.com",
+      password: bycrypt.hashSync("123456"),
+      isAdmin: false,
+    },
+  ],
+
   products: [
     {
       name: "Free Shirt",
