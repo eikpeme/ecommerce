@@ -1,0 +1,39 @@
+import nc from "next-connect";
+import User from "../../../models/User";
+import db from "../../../utils/db";
+import bcrypt from "bcryptjs";
+import { signToken } from "../../../utils/auth";
+const handler = nc();
+
+handler.post(async (req, res) => {
+  await db.connect();
+  console.log(req);
+//   const use = await new User({
+//     ...req.body,
+//     isAdmin: false,
+//     password: bcyrpt.hashSync(req.body.password),
+//   });
+
+  const newUser = await new User({
+    name: req.body.name,
+    email: req.body.email,
+    password: bcrypt.hashSync(req.body.password),
+    isAdmin: false,
+  });
+
+  const user = await newUser.save();
+  await db.disconnect();
+
+  {
+    const token = signToken(user);
+    res.send({
+      token,
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      isAdmin: user.isAdmin,
+    });
+  }
+});
+
+export default handler;
