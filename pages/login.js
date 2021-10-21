@@ -6,15 +6,28 @@ import {
   TextField,
   Typography,
 } from "@material-ui/core";
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Layout from "../components/Layout";
 import NextLink from "next/link";
 import useStyles from "../utils/styles";
 import axios from "axios";
+import { Store } from "../utils/Store";
+import { useRouter } from "next/router";
+import Cookies from "js-cookie";
 
 function Login(props) {
-  const classes = useStyles();
+  const router = useRouter();
+  const { redirect } = router.query; //login> rediret =/shipping
+  const { state, dispatch } = useContext(Store);
+  const { userInfo } = state;
 
+  useEffect(() => {
+    if (userInfo) {
+      router.push("/");
+    }
+  }, []);
+
+  const classes = useStyles();
   const [email, setEmail] = useState(" ");
   const [password, setPassword] = useState(" ");
 
@@ -26,10 +39,12 @@ function Login(props) {
         email,
         password,
       });
-      alert("success login");
-      console.log(data);
+      console.log("this is data-->", data);
+      dispatch({ type: "USER_LOGIN", payload: data });
+      Cookies.set("userInfo", JSON.stringify(data));
+      router.push(redirect || "/");
     } catch (error) {
-      alert(error.message);
+      alert(error.response.data ? error.response.data.message : error.message);
     }
   };
 
