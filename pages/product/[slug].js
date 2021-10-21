@@ -21,7 +21,7 @@ import { Store } from "../../utils/Store";
 
 const ProductScreen = ({ product }) => {
   const { dispatch } = useContext(Store);
-
+  const router = useRouter();
   const classes = useStyles();
   if (!product) return <div> Product Not Found</div>;
 
@@ -32,6 +32,7 @@ const ProductScreen = ({ product }) => {
       return;
     }
     dispatch({ type: "CART_ADD_ITEM", payload: { ...product, quantity: 1 } });
+    router.push("/cart");
   };
 
   return (
