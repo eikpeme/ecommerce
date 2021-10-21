@@ -19,16 +19,20 @@ import React, { useContext } from "react";
 import axios from "axios";
 
 export default function Home({ products }) {
-  const { dispatch } = useContext(Store);
+  const { dispatch, state } = useContext(Store);
   const router = useRouter();
 
   const addToCartHandler = async (product) => {
     const { data } = await axios.get(`/api/products/${product._id}`);
-    if (data.countInStock <= 0) {
-      window.alert("Product is Out of Stock");
+    const existItem = state.cart.cartItems.find((x) => x._id === product._id);
+    const quantity = existItem ? existItem.quantity + 1 : 1;
+
+    if (data.countInStock < quantity) {
+      window.alert("Sorry, Products is Out of Stock");
       return;
     }
-    dispatch({ type: "CART_ADD_ITEM", payload: { ...product, quantity: 1 } });
+
+    dispatch({ type: "CART_ADD_ITEM", payload: { ...product, quantity } });
     router.push("/cart");
   };
 

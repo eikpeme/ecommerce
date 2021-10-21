@@ -126,10 +126,12 @@ function CartScreen() {
                   <Typography variant="h2">
                     {" "}
                     Subtotal (
-                    {cartItems.reduce(
-                      (total, value) => total + value.quantity,
-                      0
-                    )}{" "}
+                    {
+                      (cartItems.reduce(
+                        (total, value) => total + value.quantity
+                      ),
+                      0)
+                    }{" "}
                     items) : $
                     {cartItems.reduce((total, value) => total + value.price, 0)}
                   </Typography>

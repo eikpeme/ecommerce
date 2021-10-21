@@ -44,6 +44,8 @@ const reducer = (state, action) => {
       return state;
   }
 };
+
+
 export const StoreProvider = (props) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const value = { state, dispatch };
