@@ -22,8 +22,10 @@ import {
   Card,
 } from "@material-ui/core";
 import NextLink from "next/link";
+import { Router, useRouter } from "next/router";
 
 function CartScreen() {
+  const router = useRouter();
   const { state, dispatch } = useContext(Store);
   const {
     cart: { cartItems },
@@ -40,6 +42,10 @@ function CartScreen() {
 
   const removeItemHandler = (item) => {
     dispatch({ type: "CART_REMOVE_ITEM", payload: item });
+  };
+
+  const checkOutHandler = () => {
+    router.push("/shipping");
   };
   return (
     <Layout title="shopping cart">
@@ -126,18 +132,21 @@ function CartScreen() {
                   <Typography variant="h2">
                     {" "}
                     Subtotal (
-                    {
-                      (cartItems.reduce(
-                        (total, value) => total + value.quantity
-                      ),
-                      0)
-                    }{" "}
+                    {cartItems.reduce(
+                      (total, value) => total + value.quantity,
+                      0
+                    )}{" "}
                     items) : $
                     {cartItems.reduce((total, value) => total + value.price, 0)}
                   </Typography>
                 </ListItem>
                 <ListItem>
-                  <Button variant="contained" color="primary" fullWidth>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    fullWidth
+                    onClick={checkOutHandler}
+                  >
                     {" "}
                     Check Out
                   </Button>
