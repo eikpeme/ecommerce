@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import Layout from "../components/Layout";
 import { Store } from "../utils/Store";
 import Image from "next/image";
+import dynamic from "next/dynamic";
 import {
   Grid,
   TableContainer,
@@ -21,7 +22,7 @@ import {
 } from "@material-ui/core";
 import NextLink from "next/link";
 
-function cart(props) {
+function CartScreen(props) {
   const { state } = useContext(Store);
   const {
     cart: { cartItems },
@@ -104,8 +105,8 @@ function cart(props) {
                       {cartItems.reduce(
                         (total, value) => total + value.quantity,
                         0
-                      )}
-                      {' '}items) : $
+                      )}{" "}
+                      items) : $
                       {cartItems.reduce(
                         (total, value) => total + value.price,
                         0
@@ -128,4 +129,4 @@ function cart(props) {
   );
 }
 
-export default cart;
+export default dynamic(() => Promise.resolve(CartScreen),{ssr: false});
