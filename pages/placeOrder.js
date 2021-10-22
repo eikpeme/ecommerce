@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Layout from "../components/Layout";
 import { Store } from "../utils/Store";
 import Image from "next/image";
@@ -25,11 +25,14 @@ import NextLink from "next/link";
 import { Router, useRouter } from "next/router";
 import useStyles from "../utils/styles";
 import CheckoutWizard from "../components/CheckoutWizard";
+import { useSnackbar } from "notistack";
 
 function PlaceOrder() {
   const router = useRouter();
   const { state, dispatch } = useContext(Store);
   const classes = useStyles();
+  const { closeSnackbar, enqueueSnackbar } = useSnackbar();
+  const [loading, setLoading] = useState(false);
   const {
     cart: { cartItems },
     cart: { shippingAddress },
@@ -37,10 +40,6 @@ function PlaceOrder() {
   } = state;
 
   const { fullName, address, city, postalCode, country } = shippingAddress;
-
-  const PlaceOrderHandler = () => {
-    router.push("/confirmationPage");
-  };
 
   const round2 = (num) => Math.round(num * 100 + Number.EPSILON) / 100; //123.456 => 123.46
   const itemsPrice = cartItems.reduce(
@@ -58,6 +57,17 @@ function PlaceOrder() {
       router.push("//payment");
     }
   }, []);
+
+  const placeOrderHandler = () => {
+    closeSnackbar();
+    try {
+      setLoading(true);
+    } catch (error) {
+      setLoading(false);
+      enqueueSnackbar(getError(error), { variant: "error" });
+    }
+    router.push("/confirmationPage");
+  };
 
   return (
     <Layout title="Place Order">
