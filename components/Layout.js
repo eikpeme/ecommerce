@@ -117,7 +117,6 @@ const Layout = ({ title, children, description }) => {
                 <>
                   <Button
                     aria-controls="simple-menu"
-                    aria-haspopus="true"
                     onClick={loginClickHandler}
                     className={classes.navbarButton}
                   >

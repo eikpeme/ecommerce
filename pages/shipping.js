@@ -34,8 +34,7 @@ export default function Shipping() {
   useEffect(() => {
     if (!userInfo) {
       router.push("/login?redirect=/shipping");
-    }
-
+    } 
     setValue("fullName", shippingAddress.fullName);
     setValue("address", shippingAddress.address);
     setValue("city", shippingAddress.city);

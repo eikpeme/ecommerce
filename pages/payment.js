@@ -47,8 +47,6 @@ function Payment(props) {
       router.push("/placeOrder");
     }
   };
-  console.log(paymentMethod);
-
   return (
     <Layout title="Payment Method">
       <CheckoutWizard activeStep={2}></CheckoutWizard>
