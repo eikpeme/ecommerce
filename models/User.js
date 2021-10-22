@@ -12,6 +12,7 @@ const userSchema = new mongoose.Schema(
   }
 );
 
+//If model excist, use, else create new user model
 const User = mongoose.models.User || mongoose.model("User", userSchema);
 
 export default User;
