@@ -209,7 +209,7 @@ function PlaceOrder() {
                   variant="contained"
                   color="primary"
                   fullWidth
-                  onClick={PlaceOrderHandler}
+                  onClick={placeOrderHandler}
                 >
                   Place Order
                 </Button>
