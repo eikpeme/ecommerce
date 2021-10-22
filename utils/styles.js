@@ -31,7 +31,10 @@ const useStyles = makeStyles({
   },
   navbarButton: {
     color: "#ffffff",
-    textTransform: "initial", 
+    textTransform: "initial",
+  },
+  transparentBackground: {
+    backgroundColor: "transparent",
   },
 });
 

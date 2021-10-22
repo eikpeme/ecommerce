@@ -12,7 +12,7 @@ import { Store } from "../utils/Store";
 import useStyles from "../utils/styles";
 import Cookies from "js-cookie";
 import { Controller, useForm } from "react-hook-form";
-import CheckoutWizard from "../components/checkoutWizard";
+import CheckoutWizard from "../components/CheckoutWizard";
 
 //import { getError } from '../utils/error';
 
@@ -35,7 +35,7 @@ export default function Shipping() {
     if (!userInfo) {
       router.push("/login?redirect=/shipping");
     }
-    console.log(shippingAddress);
+
     setValue("fullName", shippingAddress.fullName);
     setValue("address", shippingAddress.address);
     setValue("city", shippingAddress.city);
@@ -45,14 +45,13 @@ export default function Shipping() {
 
   const classes = useStyles();
 
-
   const submitHandler = ({ fullName, address, city, postalCode, country }) => {
     dispatch({
       type: "SAVE_SHIPPING_ADDRESS",
       payload: { fullName, address, city, postalCode, country },
     });
     Cookies.set(
-      "ShippingAddress",
+      "shippingAddress",
       JSON.stringify({
         fullName,
         address,
@@ -63,7 +62,6 @@ export default function Shipping() {
     );
     router.push("/payment");
   };
-
 
   return (
     <Layout title="Shipping Address">
@@ -88,7 +86,7 @@ export default function Shipping() {
                   fullWidth
                   id="fullName"
                   label="Full Name"
-                  error={Boolean(errors.name)}
+                  error={Boolean(errors.fullName)}
                   helperText={
                     errors.fullName
                       ? errors.fullName.type === "minLength"
@@ -116,7 +114,7 @@ export default function Shipping() {
                   fullWidth
                   id="address"
                   label="Address"
-                  error={Boolean(errors.name)}
+                  error={Boolean(errors.address)}
                   helperText={
                     errors.address
                       ? errors.address.type === "minLength"
@@ -144,7 +142,7 @@ export default function Shipping() {
                   fullWidth
                   id="city"
                   label="City"
-                  error={Boolean(errors.name)}
+                  error={Boolean(errors.city)}
                   helperText={
                     errors.city
                       ? errors.city.type === "minLength"
@@ -172,7 +170,7 @@ export default function Shipping() {
                   fullWidth
                   id="postalCode"
                   label="Postal Code"
-                  error={Boolean(errors.name)}
+                  error={Boolean(errors.postalCode)}
                   helperText={
                     errors.postalCode
                       ? errors.postalCode.type === "minLength"
@@ -200,7 +198,7 @@ export default function Shipping() {
                   fullWidth
                   id="country"
                   label="Country"
-                  error={Boolean(errors.name)}
+                  error={Boolean(errors.country)}
                   helperText={
                     errors.country
                       ? errors.country.type === "minLength"
