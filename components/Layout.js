@@ -101,16 +101,18 @@ const Layout = ({ title, children, description }) => {
               ></Switch>
               <NextLink href="/cart" passHref>
                 <Link>
-                  {cart.cartItems.length > 0 ? (
-                    <Badge
-                      color="secondary"
-                      badgeContent={cart.cartItems.length}
-                    >
-                      Cart
-                    </Badge>
-                  ) : (
-                    "Cart"
-                  )}
+                  <Typography component='span'>
+                    {cart.cartItems.length > 0 ? (
+                      <Badge
+                        color="secondary"
+                        badgeContent={cart.cartItems.length}
+                      >
+                        Cart
+                      </Badge>
+                    ) : (
+                      'Cart'
+                    )}
+                  </Typography>
                 </Link>
               </NextLink>
               {userInfo ? (
@@ -139,7 +141,9 @@ const Layout = ({ title, children, description }) => {
                 </>
               ) : (
                 <NextLink href="/login" passHref>
-                  <Link>Login </Link>
+                  <Link>
+                    <Typography component='span'>Login</Typography>
+                  </Link>
                 </NextLink>
               )}
             </div>

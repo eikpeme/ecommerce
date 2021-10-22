@@ -1,5 +1,4 @@
 import Layout from "../components/Layout";
-import data from "../utils/data";
 import {
   Grid,
   Card,
