@@ -80,7 +80,7 @@ const Layout = ({ title, children, description }) => {
     <div>
       <Head>
         <title>
-          {title ? `${title} -  Next Ecommerce` : "Next Ecommerce "}
+          {title ? `${title} -  Rock Stop` : "Rock Stop "}
         </title>
         {description && <meta name="description" content={description}></meta>}
       </Head>
@@ -90,7 +90,7 @@ const Layout = ({ title, children, description }) => {
           <Toolbar>
             <NextLink href="/" passHref>
               <Link>
-                <Typography className={classes.brand}> Ecommerce </Typography>
+                <Typography className={classes.brand}> Rock Stop </Typography>
               </Link>
             </NextLink>
             <div className={classes.grow}></div>
@@ -151,7 +151,7 @@ const Layout = ({ title, children, description }) => {
         </AppBar>
         <Container className={classes.main}>{children}</Container>
         <footer className={classes.footer}>
-          <Typography>All rights reserved, Next Ecommerce.</Typography>
+          <Typography>All rights reserved, Rock Stop.</Typography>
         </footer>
       </ThemeProvider>
     </div>
