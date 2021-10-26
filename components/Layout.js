@@ -79,16 +79,14 @@ const Layout = ({ title, children, description }) => {
   return (
     <div>
       <Head>
-        <title>
-          {title ? `${title} -  Rock Stop` : "Rock Stop "}
-        </title>
+        <title>{title ? `${title} -  Rock Stop` : "Rock Stop "}</title>
         {description && <meta name="description" content={description}></meta>}
       </Head>
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <AppBar className={classes.navbar} position="static">
           <Toolbar>
-            <NextLink href="/" passHref>
+            <NextLink className={classes.a} href="/" passHref>
               <Link>
                 <Typography className={classes.brand}> Rock Stop </Typography>
               </Link>
@@ -101,7 +99,7 @@ const Layout = ({ title, children, description }) => {
               ></Switch>
               <NextLink href="/cart" passHref>
                 <Link>
-                  <Typography component='span'>
+                  <Typography className={classes.brand} component="span">
                     {cart.cartItems.length > 0 ? (
                       <Badge
                         color="secondary"
@@ -110,20 +108,23 @@ const Layout = ({ title, children, description }) => {
                         Cart
                       </Badge>
                     ) : (
-                      'Cart'
+                      "Cart"
                     )}
                   </Typography>
                 </Link>
               </NextLink>
               {userInfo ? (
                 <>
-                  <Button
-                    aria-controls="simple-menu"
-                    onClick={loginClickHandler}
-                    className={classes.navbarButton}
-                  >
-                    {userInfo.name}
-                  </Button>
+                  <Typography className={classes.brand} component="span">
+                    <Button
+                      aria-controls="simple-menu"
+                      onClick={loginClickHandler}
+                      className={classes.navbarButton}
+                    >
+                      {userInfo.name}
+                    </Button>
+                  </Typography>
+
                   <Menu
                     id="simple-menu"
                     anchorEl={anchorEl}
@@ -142,7 +143,9 @@ const Layout = ({ title, children, description }) => {
               ) : (
                 <NextLink href="/login" passHref>
                   <Link>
-                    <Typography component='span'>Login</Typography>
+                    <Typography className={classes.brand} component="span">
+                      Login
+                    </Typography>
                   </Link>
                 </NextLink>
               )}
