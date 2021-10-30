@@ -78,8 +78,9 @@ function PlaceOrder() {
       dispatch({ type: "CART_CLEAR" });
       Cookies.remove("cartItems");
       setLoading(false);
-      router.push(`/`);
-      //   router.push(`/order/${data._id}`);
+      //router.push(`/`);
+      router.push(`/confirmation`);
+      //router.push(`/order/${data._id}`);
     } catch (err) {
       setLoading(false);
       enqueueSnackbar(getError(err), { variant: "error" });

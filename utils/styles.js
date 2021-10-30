@@ -8,7 +8,7 @@ const useStyles = makeStyles({
   brand: {
     color: "#ffffff",
     fontWeight: "bold",
-    fonrSize: "1.5rem",
+    fontSize: "1.5rem",
     marginLeft: 10,
   },
   grow: { flex: 1 },
@@ -33,6 +33,18 @@ const useStyles = makeStyles({
   },
   transparentBackground: {
     backgroundColor: "transparent",
+  },
+  confirmation: {
+    margin: "0 auto",
+    textAlign: "center",
+    fontWeight: "bold",
+    fontSize: "3.5rem",
+    marginTop: 120,
+  },
+  cont: {
+    margin: "0 auto",
+    textAlign: "center",
+    marginTop: 120,
   },
 });
 
