@@ -84,7 +84,7 @@ const data = {
     {
       name: "Diamond",
       slug: "diamond",
-      category: "Shirts",
+      category: "Metamorphic",
       image: "/images/diamond.jpg",
       price: 300,
       brand: "Earth",
