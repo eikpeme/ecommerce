@@ -61,6 +61,13 @@ export default function Home({ products }) {
     e.preventDefault;
     const filter = e.currentTarget.value;
     console.log(e.currentTarget.value);
+
+    if (filter === "All") {
+      setdisplayedProducts(products);
+      setProductSlugs(products.map((product) => product.slug));
+
+      return;
+    }
     const filteredProducts = products.filter((product) => {
       return product.category.split(" ").slice(-1)[0] === filter;
     });
@@ -76,6 +83,13 @@ export default function Home({ products }) {
       <div>
         <h1> Products</h1>
         <div className={classes.filterButtonContainer}>
+          <Button
+            onClick={(e) => filterProducts(e)}
+            value="All"
+            className={classes.filterButton}
+          >
+            All
+          </Button>
           <Button
             onClick={(e) => filterProducts(e)}
             value="Gem"
