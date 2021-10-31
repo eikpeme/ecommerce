@@ -32,14 +32,16 @@ function PlaceOrder() {
   const classes = useStyles();
   const router = useRouter();
 
-    // useEffect(() => {
-    //   if (!paymentMethod) {
-    //     router.push("/payment");
-    //   }
-    // }, []);
+  // useEffect(() => {
+  //   if (!paymentMethod) {
+  //     router.push("/payment");
+  //   }
+  // }, []);
 
   return (
     <Layout title="Order Confirmation">
+      <CheckoutWizard activeStep={4}></CheckoutWizard>
+
       <Typography component="h1" variant="h1">
         Order Confirmation
       </Typography>
