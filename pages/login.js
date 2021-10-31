@@ -65,7 +65,7 @@ function Login(props) {
             <Controller
               name="email"
               control={control}
-              defaultValue=" "
+              defaultValue="admin@example.com"
               rules={{
                 required: true,
                 pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
@@ -94,7 +94,7 @@ function Login(props) {
             <Controller
               name="password"
               control={control}
-              defaultValue=""
+              defaultValue="123456"
               rules={{
                 required: true,
                 minLength: 6,
