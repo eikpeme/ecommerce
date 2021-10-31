@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { useRouter } from "next/router";
-import data from "../../utils/data";
 import Image from "next/image";
 import Layout from "../../components/Layout";
 import NextLink from "next/link";
@@ -23,12 +22,17 @@ const ProductScreen = ({ product }) => {
   const { dispatch, state } = useContext(Store);
   const router = useRouter();
   const classes = useStyles();
+
+  const { slugs } = state;
+  console.log("slugs in dynamic-->", slugs);
+  const slugNum = slugs.indexOf(product.slug);
+
+  console.log(slugNum);
   if (!product) return <div> Product Not Found</div>;
 
   const addToCartHandler = async () => {
     const existItem = state.cart.cartItems.find((x) => x._id === product._id);
     const quantity = existItem ? existItem.quantity + 1 : 1;
-    
     const { data } = await axios.get(`/api/products/${product._id}`);
 
     if (data.countInStock < quantity) {
@@ -48,79 +52,94 @@ const ProductScreen = ({ product }) => {
           <Link>back to products </Link>
         </NextLink>
       </div>
-      <Grid container spacing={1}>
-        <Grid item md={6} xs={12}>
-          <Image
-            src={product.image}
-            alst={product.name}
-            width={610}
-            height={640}
-            layout="responsive"
-          ></Image>
-        </Grid>
-        <Grid item md={3} xs={12}>
-          <List>
-            <ListItem>
-              <Typography component="h1" variant="h1">
-                {" "}
-                {product.name}
-              </Typography>
-            </ListItem>
-            <ListItem>
-              <Typography> Category: {product.category}</Typography>
-            </ListItem>
-            <ListItem>
-              <Typography> Brand: {product.brand} </Typography>
-            </ListItem>
-            <ListItem>
-              <Typography>
-                Rating: {product.rating} stars ({product.numReviews} reviews)
-              </Typography>
-            </ListItem>
-            <ListItem>
-              <Typography> Description: {product.description}</Typography>
-            </ListItem>
-          </List>
-        </Grid>
-        <Grid item md={3} xs={12}>
-          <Card>
+      <div className={classes.context}>
+        {slugs[slugNum - 1] && (
+          <NextLink href={`/product/${slugs[slugNum - 1]}`} passHref>
+            <Link>
+              <Button className={classes.navButton}>Prev</Button>
+            </Link>
+          </NextLink>
+        )}
+        <Grid container item spacing={1}>
+          <Grid item md={6} xs={12}>
+            <Image
+              src={product.image}
+              alt={product.name}
+              width={610}
+              height={640}
+              layout="responsive"
+            ></Image>
+          </Grid>
+          <Grid item md={3} xs={12}>
             <List>
               <ListItem>
-                <Grid container>
-                  <Grid item xs={6}>
-                    <Typography> Price</Typography>
-                  </Grid>
-                  <Grid item xs={6}>
-                    <Typography> ${product.price}</Typography>{" "}
-                  </Grid>
-                </Grid>
+                <Typography component="h1" variant="h1">
+                  {product.name}
+                </Typography>
               </ListItem>
               <ListItem>
-                <Grid container>
-                  <Grid item xs={6}>
-                    <Typography> Status</Typography>
-                  </Grid>
-                  <Grid item xs={6}>
-                    <Typography>
-                      {product.countInStock > 0 ? "In stock" : "Unavailable"}
-                    </Typography>
-                  </Grid>
-                </Grid>
+                <Typography> Category: {product.category}</Typography>
               </ListItem>
               <ListItem>
-                <Button
-                  fullWidth
-                  variant="contained"
-                  color="primary"
-                  onClick={addToCartHandler}
-                >
-                  Add to Cart
-                </Button>
+                <Typography> Brand: {product.brand} </Typography>
+              </ListItem>
+              <ListItem>
+                <Typography>
+                  Rating: {product.rating} stars ({product.numReviews} reviews)
+                </Typography>
+              </ListItem>
+              <ListItem>
+                <Typography> Description: {product.description}</Typography>
               </ListItem>
             </List>
-          </Card>
+          </Grid>
+          <Grid item md={3} xs={12}>
+            <Card>
+              <List>
+                <ListItem>
+                  <Grid container>
+                    <Grid item xs={6}>
+                      <Typography> Price</Typography>
+                    </Grid>
+                    <Grid item xs={6}>
+                      <Typography> ${product.price}</Typography>{" "}
+                    </Grid>
+                  </Grid>
+                </ListItem>
+                <ListItem>
+                  <Grid container>
+                    <Grid item xs={6}>
+                      <Typography> Status</Typography>
+                    </Grid>
+                    <Grid item xs={6}>
+                      <Typography>
+                        {product.countInStock > 0 ? "In stock" : "Unavailable"}
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                </ListItem>
+                <ListItem>
+                  <Button
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    onClick={addToCartHandler}
+                  >
+                    Add to Cart
+                  </Button>
+                </ListItem>
+              </List>
+            </Card>
+          </Grid>
         </Grid>
-      </Grid>
+        {slugs[slugNum + 1] && (
+          <NextLink href={`/product/${slugs[slugNum + 1]}`} passHref>
+            <Link>
+              <Button className={classes.navButton}>Next</Button>
+            </Link>
+          </NextLink>
+        )}
+      </div>
     </Layout>
   );
 };
@@ -132,15 +151,11 @@ export const getServerSideProps = async (context) => {
   const { params } = context;
   const { slug } = params;
 
-  try {
-    await db.connect();
-    //returns a mongoose doc
-    const product = await Product.findOne({ slug }).lean();
-    props.product = db.convertDocToObj(product);
-    await db.disconnect();
-  } catch (error) {
-    throw error;
-  }
+  await db.connect();
+  //returns a mongoose doc
+  const product = await Product.findOne({ slug }).lean();
+  props.product = db.convertDocToObj(product);
+  await db.disconnect();
 
   return {
     props,

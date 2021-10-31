@@ -14,12 +14,32 @@ import db from "../utils/db";
 import Product from "../models/Product";
 import { useRouter } from "next/router";
 import { Store } from "../utils/Store";
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 export default function Home({ products }) {
   const { dispatch, state } = useContext(Store);
   const router = useRouter();
+
+  const { slugs } = state;
+  console.log("slugs-->", slugs);
+
+  const [productSlugs, setProductSlugs] = useState(slugs);
+
+  useEffect(() => {
+    // if (!paymentMethod) {
+    //   router.push("/payment");
+    // }
+
+    dispatch({ type: "PRODUCT_SLUGS", payload: productSlugs });
+    Cookies.set("slugs", JSON.stringify(productSlugs));
+
+    console.log("productSlugs in useEffect", productSlugs, productSlugs.length);
+    if (!productSlugs.length) {
+      setProductSlugs(products.map((product) => product.slug));
+    }
+  }, [productSlugs]);
 
   const addToCartHandler = async (product) => {
     const { data } = await axios.get(`/api/products/${product._id}`);
@@ -81,14 +101,13 @@ export default function Home({ products }) {
 export const getServerSideProps = async (context) => {
   const props = {};
 
-  try {
-    await db.connect();
-    const products = await Product.find({}).lean();
-    props.products = products.map(db.convertDocToObj);
-    await db.disconnect();
-  } catch (error) {
-    throw error;
-  }
+  //await axios.get('api/')
+
+  await db.connect();
+  const products = await Product.find({}).lean();
+  props.products = products.map(db.convertDocToObj);
+  await db.disconnect();
+
   return {
     props,
   };

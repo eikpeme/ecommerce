@@ -19,10 +19,13 @@ const initialState = {
   userInfo: Cookies.get("userInfo")
     ? JSON.parse(Cookies.get("userInfo"))
     : null,
+  slugs: Cookies.get("slugs") ? JSON.parse(Cookies.get("slugs")) : [],
 };
 
 const reducer = (state, action) => {
   switch (action.type) {
+    case "PRODUCT_SLUGS":
+      return { ...state, slugs: action.payload };
     case "DARK_MODE_ON":
       return { ...state, darkMode: true };
     case "DARK_MODE_OFF":

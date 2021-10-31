@@ -1,4 +1,5 @@
 import bycrypt from "bcryptjs";
+
 const data = {
   users: [
     {
@@ -19,7 +20,7 @@ const data = {
     {
       name: "Ruby",
       slug: "ruby",
-      category: "Igneous",
+      category: "Precious Gem",
       image: "/images/ruby.jpg",
       price: 170,
       brand: "Fire",
@@ -32,7 +33,7 @@ const data = {
     {
       name: "Emerald",
       slug: "emerald",
-      category: "Metamorphic",
+      category: "Precious Gem",
       image: "/images/emerald.jpg",
       price: 130,
       brand: "Earth",
@@ -45,7 +46,7 @@ const data = {
     {
       name: "Sapphire",
       slug: "sapphire",
-      category: "Igneous",
+      category: "Precious Gem",
       image: "/images/sapphire.jpg",
       price: 290,
       brand: "Water",
@@ -58,7 +59,7 @@ const data = {
     {
       name: "Amethyst",
       slug: "amethyst",
-      category: "Igneous",
+      category: "Precious Gem",
       image: "/images/amethyst.jpg",
       price: 155,
       brand: "Wind",
@@ -71,7 +72,7 @@ const data = {
     {
       name: "Opal",
       slug: "opal",
-      category: "Metamorphic",
+      category: "Precious Rock",
       image: "/images/opal.jpg",
       price: 110,
       brand: "Fire",
@@ -84,7 +85,7 @@ const data = {
     {
       name: "Diamond",
       slug: "diamond",
-      category: "Metamorphic",
+      category: "Precious Gem",
       image: "/images/diamond.jpg",
       price: 300,
       brand: "Earth",
@@ -97,7 +98,7 @@ const data = {
     {
       name: "Tanzanite",
       slug: "tanzanite",
-      category: "Pants",
+      category: "Precious Rock",
       image: "/images/tanzanite.jpg",
       price: 230,
       brand: "Earth",
@@ -110,7 +111,7 @@ const data = {
     {
       name: "Topaz",
       slug: "topaz",
-      category: "Metamorphic",
+      category: "Precious Stone",
       image: "/images/topaz.jpg",
       price: 100,
       brand: "Water",
@@ -123,7 +124,7 @@ const data = {
     {
       name: "Garnet",
       slug: "garnet",
-      category: "Metamorphic",
+      category: "Precious Stone",
       image: "/images/garnet.jpg",
       price: 120,
       brand: "Fire",
@@ -136,7 +137,7 @@ const data = {
     {
       name: "Pearl",
       slug: "pearl",
-      category: "Sedimentary",
+      category: "Precios Rock",
       image: "/images/pearl.jpg",
       price: 300,
       brand: "Water",
@@ -149,7 +150,7 @@ const data = {
     {
       name: "Moonstone",
       slug: "Moonstone",
-      category: "Sedimentary",
+      category: "Precious Stone",
       image: "/images/moonstone.jpg",
       price: 210,
       brand: "Water",
@@ -162,7 +163,7 @@ const data = {
     {
       name: "Peridot",
       slug: "peridot",
-      category: "Metamorphic",
+      category: "Precious Rock",
       image: "/images/peridot.jpg",
       price: 90,
       brand: "Wind",
@@ -175,7 +176,7 @@ const data = {
     {
       name: "Onyx",
       slug: "onyx",
-      category: "Igneous",
+      category: "Precious Rock",
       image: "/images/onyx.jpg",
       price: 70,
       brand: "Earth",
