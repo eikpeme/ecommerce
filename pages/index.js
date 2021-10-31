@@ -22,7 +22,6 @@ import Cookies from "js-cookie";
 export default function Home({ products }) {
   const { dispatch, state } = useContext(Store);
   const router = useRouter();
-
   const { slugs } = state;
   const classes = useStyles();
   const [displayedProducts, setdisplayedProducts] = useState(products);
@@ -61,7 +60,6 @@ export default function Home({ products }) {
     if (filter === "All") {
       setdisplayedProducts(products);
       setProductSlugs(products.map((product) => product.slug));
-
       return;
     }
     const filteredProducts = products.filter((product) => {
@@ -77,38 +75,39 @@ export default function Home({ products }) {
   return (
     <Layout>
       <div>
-        <h1> Products</h1>
-        <div className={classes.filterButtonContainer}>
-          <Button
-            onClick={(e) => filterProducts(e)}
-            value="All"
-            className={classes.filterButton}
-          >
-            All
-          </Button>
-          <Button
-            onClick={(e) => filterProducts(e)}
-            value="Gem"
-            className={classes.filterButton}
-          >
-            Precious Gems
-          </Button>
-          <Button
-            onClick={(e) => filterProducts(e)}
-            value="Stone"
-            className={classes.filterButton}
-          >
-            Precious Stones
-          </Button>
-          <Button
-            onClick={(e) => filterProducts(e)}
-            value="Rock"
-            className={classes.filterButton}
-          >
-            Precious Rocks
-          </Button>
-        </div>
+        <h1>Products</h1>
+
         <Grid container spacing={3}>
+          <Grid container className={classes.filterButtonContainer}>
+            <Button
+              onClick={(e) => filterProducts(e)}
+              value="All"
+              className={classes.filterButton}
+            >
+              All
+            </Button>
+            <Button
+              onClick={(e) => filterProducts(e)}
+              value="Gem"
+              className={classes.filterButton}
+            >
+              Precious Gems
+            </Button>
+            <Button
+              onClick={(e) => filterProducts(e)}
+              value="Stone"
+              className={classes.filterButton}
+            >
+              Precious Stones
+            </Button>
+            <Button
+              onClick={(e) => filterProducts(e)}
+              value="Rock"
+              className={classes.filterButton}
+            >
+              Precious Rocks
+            </Button>
+          </Grid>
           {!displayedProducts
             ? "no product"
             : displayedProducts.map((product) => {
