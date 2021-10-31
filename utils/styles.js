@@ -1,4 +1,5 @@
 import { makeStyles } from "@material-ui/core";
+import { borderRadius } from "@mui/system";
 
 const useStyles = makeStyles({
   navbar: {
@@ -50,7 +51,25 @@ const useStyles = makeStyles({
     display: "flex",
     "align-items": "center",
   },
-  navButton: { marginLeft: 10, marginRight: 10 },
+  navButton: { marginLeft: 10, marginRight: 15 },
+
+  filterButton: {
+    backgroundColor: '#142d4c',
+    color: 'white',
+    borderRadius : "0.7rem",
+    fontWeight: "bold",
+    "box-shadow": "5px 5px 1px 0.1px rgba(0, 0, 255, .2)",
+    fontSize: "0.8rem",
+  },
+
+  filterButtonContainer: {
+    display: "flex",
+    justifyContent: "center",
+    marginBottom: 30,
+    gap: "100px",
+  
+   
+  },
 });
 
 export default useStyles;

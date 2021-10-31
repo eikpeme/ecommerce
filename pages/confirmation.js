@@ -51,7 +51,7 @@ function PlaceOrder() {
             component="h1"
             variant="h1"
           >
-            Your Order has Been Placed!
+            Your Order Has Been Placed!
           </Typography>
         </Grid>
         <Grid item md={12} xs={12}>

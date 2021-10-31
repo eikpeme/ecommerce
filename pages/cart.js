@@ -124,13 +124,26 @@ function CartScreen() {
                 </TableBody>
               </Table>
             </TableContainer>
+            <NextLink href="/" passHref>
+              <Link>
+                <Typography
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    marginTop: 10,
+                    marginBottom: 10,
+                  }}
+                >
+                  Continue Shopping
+                </Typography>
+              </Link>
+            </NextLink>
           </Grid>
           <Grid item md={3} xs={12}>
             <Card>
               <List>
                 <ListItem>
                   <Typography variant="h2">
-                    {" "}
                     Subtotal (
                     {cartItems.reduce(
                       (total, value) => total + value.quantity,

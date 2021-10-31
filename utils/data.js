@@ -163,7 +163,7 @@ const data = {
     {
       name: "Peridot",
       slug: "peridot",
-      category: "Precious Rock",
+      category: "Precious Stone",
       image: "/images/peridot.jpg",
       price: 90,
       brand: "Wind",

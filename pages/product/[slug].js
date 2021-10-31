@@ -49,7 +49,9 @@ const ProductScreen = ({ product }) => {
     <Layout title={product.name} description={product.description}>
       <div className={classes.section}>
         <NextLink href="/" passHref>
-          <Link>back to products </Link>
+          <Link>
+            <Typography>Back to products</Typography>
+          </Link>
         </NextLink>
       </div>
       <div className={classes.context}>

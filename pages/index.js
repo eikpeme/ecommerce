@@ -16,6 +16,7 @@ import { useRouter } from "next/router";
 import { Store } from "../utils/Store";
 import React, { useContext, useState, useEffect } from "react";
 import axios from "axios";
+import useStyles from "../utils/styles";
 import Cookies from "js-cookie";
 
 export default function Home({ products }) {
@@ -24,7 +25,8 @@ export default function Home({ products }) {
 
   const { slugs } = state;
   console.log("slugs-->", slugs);
-
+  const classes = useStyles();
+  const [displayedProducts, setdisplayedProducts] = useState(products);
   const [productSlugs, setProductSlugs] = useState(slugs);
 
   useEffect(() => {
@@ -37,7 +39,7 @@ export default function Home({ products }) {
 
     console.log("productSlugs in useEffect", productSlugs, productSlugs.length);
     if (!productSlugs.length) {
-      setProductSlugs(products.map((product) => product.slug));
+      setProductSlugs(displayedProducts.map((product) => product.slug));
     }
   }, [productSlugs]);
 
@@ -47,7 +49,7 @@ export default function Home({ products }) {
     const quantity = existItem ? existItem.quantity + 1 : 1;
 
     if (data.countInStock < quantity) {
-      window.alert("Sorry, Products is Out of Stock");
+      window.alert("Products is out of Stock!");
       return;
     }
 
@@ -55,14 +57,51 @@ export default function Home({ products }) {
     router.push("/cart");
   };
 
+  const filterProducts = (e) => {
+    e.preventDefault;
+    const filter = e.currentTarget.value;
+    console.log(e.currentTarget.value);
+    const filteredProducts = products.filter((product) => {
+      return product.category.split(" ").slice(-1)[0] === filter;
+    });
+
+    setdisplayedProducts(filteredProducts);
+    if (filteredProducts.length) {
+      setProductSlugs(filteredProducts.map((product) => product.slug));
+    }
+  };
+
   return (
     <Layout>
       <div>
         <h1> Products</h1>
+        <div className={classes.filterButtonContainer}>
+          <Button
+            onClick={(e) => filterProducts(e)}
+            value="Gem"
+            className={classes.filterButton}
+          >
+            Precious Gems
+          </Button>
+          <Button
+            onClick={(e) => filterProducts(e)}
+            value="Stone"
+            className={classes.filterButton}
+          >
+            Precious Stones
+          </Button>
+          <Button
+            onClick={(e) => filterProducts(e)}
+            value="Rock"
+            className={classes.filterButton}
+          >
+            Precious Rocks
+          </Button>
+        </div>
         <Grid container spacing={3}>
-          {!products
+          {!displayedProducts
             ? "no product"
-            : products.map((product) => {
+            : displayedProducts.map((product) => {
                 return (
                   <Grid item md={3} key={product.name}>
                     <Card>
