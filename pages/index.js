@@ -24,7 +24,6 @@ export default function Home({ products }) {
   const router = useRouter();
 
   const { slugs } = state;
-  console.log("slugs-->", slugs);
   const classes = useStyles();
   const [displayedProducts, setdisplayedProducts] = useState(products);
   const [productSlugs, setProductSlugs] = useState(slugs);
@@ -37,7 +36,6 @@ export default function Home({ products }) {
     dispatch({ type: "PRODUCT_SLUGS", payload: productSlugs });
     Cookies.set("slugs", JSON.stringify(productSlugs));
 
-    console.log("productSlugs in useEffect", productSlugs, productSlugs.length);
     if (!productSlugs.length) {
       setProductSlugs(displayedProducts.map((product) => product.slug));
     }
@@ -60,8 +58,6 @@ export default function Home({ products }) {
   const filterProducts = (e) => {
     e.preventDefault;
     const filter = e.currentTarget.value;
-    console.log(e.currentTarget.value);
-
     if (filter === "All") {
       setdisplayedProducts(products);
       setProductSlugs(products.map((product) => product.slug));

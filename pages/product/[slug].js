@@ -24,10 +24,8 @@ const ProductScreen = ({ product }) => {
   const classes = useStyles();
 
   const { slugs } = state;
-  console.log("slugs in dynamic-->", slugs);
   const slugNum = slugs.indexOf(product.slug);
 
-  console.log(slugNum);
   if (!product) return <div> Product Not Found</div>;
 
   const addToCartHandler = async () => {
