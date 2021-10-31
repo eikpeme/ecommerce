@@ -54,9 +54,9 @@ const useStyles = makeStyles({
   navButton: { marginLeft: 10, marginRight: 15 },
 
   filterButton: {
-    backgroundColor: '#142d4c',
-    color: 'white',
-    borderRadius : "0.7rem",
+    backgroundColor: "#142d4c",
+    color: "white",
+    borderRadius: "0.7rem",
     fontWeight: "bold",
     "box-shadow": "5px 5px 1px 0.1px rgba(0, 0, 255, .2)",
     fontSize: "0.8rem",
@@ -66,9 +66,8 @@ const useStyles = makeStyles({
     display: "flex",
     justifyContent: "center",
     marginBottom: 30,
-    gap: "100px",
-  
-   
+    alignItems: "center",
+    gap: "40px",
   },
 });
 
